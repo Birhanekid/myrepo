@@ -1,0 +1,72 @@
+#%RAML 1.0
+version: V1
+title: Ethiopian airline
+types:
+  EthiopianFlight: !include EthiopianFlight.raml
+/flights:
+  get:
+    description: "This is for Ethiopian airlines"
+    queryParameters:
+       destination:
+         required: false
+         enum: 
+            - SFO
+            - LAX
+            - Cle
+    responses:
+      200:
+        body:
+          application/json:
+            type: EthiopianFlight[]
+            examples: 
+              output: !include Ethipianamerican-flights-api.raml
+  delete:
+    responses:
+      200:
+        body:
+          application/json:
+            examples:
+              message: "Flight Deleted but not relly"
+  post:
+    body:
+      application/json:
+        type: EthiopianFlight
+        examples:
+          
+            input: !include ethiopianflightbyid.raml
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              "message": "Data is successfuly inserted"
+  put:
+    body:
+      application/json:
+        type: EthiopianFlight
+        example:  !include ethiopianflightbyid.raml
+    responses:
+      202:
+        body:
+           application/json:
+             example: {"message": flight is updated}
+            
+  /{id}:
+    get:
+      responses:
+        200:
+          description: "Ethipian airliens by id"
+          body:
+            application/json:
+              type: EthiopianFlight
+              examples:
+                output:
+                  !include ethiopianflightbyid.raml
+              
+                
+
+                  
+  
+ 
+              
+

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="5136c2d5-5d38-4e43-8d3a-ca45fcd5bdea" >
+		<http:request-connection host="0.0.0.0" port="8082" />
+	</http:request-config>
+	<flow name="consumeFlow" doc:id="80e60dad-a82f-4d01-83c6-7d467fddbf2e" >
+		<http:listener doc:name="Listener" doc:id="4235597c-f764-48c5-9f0a-e7d3f6cc0d1c" config-ref="ethiopian-airline-httpListenerConfig" path="/consume"/>
+		<http:request method="GET" doc:name="Request" doc:id="6072ac78-39ab-4f84-b0d8-1385320413f7" config-ref="HTTP_Request_configuration" path="/api/flights/{id}"/>
+		<logger level="INFO" doc:name="Logger" doc:id="0aba3303-c5e7-420a-b52c-6e9f7df576b0" message="#[payload]"/>
+	</flow>
+</mule>
